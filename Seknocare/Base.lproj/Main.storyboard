@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,11 +25,36 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seknocare_bg" translatesAutoresizingMaskIntoConstraints="NO" id="x3W-Vu-XDf">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNu-QC-wIl">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y5p-ua-rdw" userLabel="buttons">
+                                        <rect key="frame" x="67" y="259" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YMg-2q-t53" userLabel="top">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23446493639999999" blue="0.19442498699999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="YMg-2q-t53" firstAttribute="height" secondItem="SNu-QC-wIl" secondAttribute="height" multiplier="0.2" id="Gau-yw-Wbe"/>
+                                    <constraint firstItem="YMg-2q-t53" firstAttribute="top" secondItem="SNu-QC-wIl" secondAttribute="top" id="SsF-7x-2Lj"/>
+                                    <constraint firstItem="YMg-2q-t53" firstAttribute="leading" secondItem="SNu-QC-wIl" secondAttribute="leading" id="eFs-8E-avH"/>
+                                    <constraint firstAttribute="trailing" secondItem="YMg-2q-t53" secondAttribute="trailing" id="lRn-DR-zlG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0078431372549019607" green="0.10980392156862745" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="SNu-QC-wIl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4L1-qQ-DcC"/>
+                            <constraint firstAttribute="trailing" secondItem="SNu-QC-wIl" secondAttribute="trailing" id="8QX-cj-h6e"/>
                             <constraint firstAttribute="trailing" secondItem="x3W-Vu-XDf" secondAttribute="trailing" id="PQj-u4-mlu"/>
                             <constraint firstItem="x3W-Vu-XDf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cZd-5I-tI1"/>
+                            <constraint firstItem="SNu-QC-wIl" firstAttribute="height" secondItem="x3W-Vu-XDf" secondAttribute="height" id="exR-dd-BjY"/>
+                            <constraint firstItem="SNu-QC-wIl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gTK-tQ-7S4"/>
                             <constraint firstItem="x3W-Vu-XDf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hgN-tE-vmH"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="x3W-Vu-XDf" secondAttribute="bottom" id="ykt-uj-uQG"/>
                         </constraints>
