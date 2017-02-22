@@ -246,18 +246,18 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3L-cP-vTh" userLabel="texts">
                                         <rect key="frame" x="0.0" y="493.66666666666663" width="414" height="122"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44o-4c-WPj">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="122"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44o-4c-WPj">
+                                                <rect key="frame" x="62" y="24.333333333333371" width="290" height="73.333333333333371"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="44o-4c-WPj" firstAttribute="leading" secondItem="r3L-cP-vTh" secondAttribute="leading" id="54B-Lq-KCj"/>
-                                            <constraint firstItem="44o-4c-WPj" firstAttribute="top" secondItem="r3L-cP-vTh" secondAttribute="top" id="9gg-56-B1x"/>
-                                            <constraint firstAttribute="bottom" secondItem="44o-4c-WPj" secondAttribute="bottom" id="gSG-5w-IoK"/>
-                                            <constraint firstAttribute="trailing" secondItem="44o-4c-WPj" secondAttribute="trailing" id="q39-9n-KBo"/>
+                                            <constraint firstItem="44o-4c-WPj" firstAttribute="height" secondItem="r3L-cP-vTh" secondAttribute="height" multiplier="0.6" id="0KY-zJ-QCL"/>
+                                            <constraint firstItem="44o-4c-WPj" firstAttribute="centerY" secondItem="r3L-cP-vTh" secondAttribute="centerY" id="bu2-MH-0WB"/>
+                                            <constraint firstItem="44o-4c-WPj" firstAttribute="width" secondItem="r3L-cP-vTh" secondAttribute="width" multiplier="0.7" id="oy5-BZ-8dg"/>
+                                            <constraint firstItem="44o-4c-WPj" firstAttribute="centerX" secondItem="r3L-cP-vTh" secondAttribute="centerX" id="uuD-eM-p2k"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mcb-RH-hym" userLabel="bottom">
