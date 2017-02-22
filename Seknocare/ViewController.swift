@@ -136,7 +136,7 @@ CBPeripheralDelegate{
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        print(sender.currentTitle)
+        print(sender.currentTitle!)
     }
     
 
