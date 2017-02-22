@@ -41,7 +41,7 @@ CBPeripheralDelegate{
             
         } else {
             print("Bluetooth not available.")
-                
+            
             // create the alert
             let alert = UIAlertController(title: "Bluetooth", message: "Please turn on bluetooth.", preferredStyle: UIAlertControllerStyle.alert)
             // add an action (button)
@@ -135,6 +135,9 @@ CBPeripheralDelegate{
         peri.writeValue(data as Data, for: chara, type: CBCharacteristicWriteType.withResponse)
     }
     
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        print(sender.currentTitle)
+    }
     
 
 }
