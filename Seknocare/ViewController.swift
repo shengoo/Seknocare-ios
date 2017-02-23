@@ -27,6 +27,19 @@ CBPeripheralDelegate{
         manager = CBCentralManager(delegate: self, queue: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+        UIApplication.shared.statusBarStyle = .lightContent
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear")
+        UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.isNavigationBarHidden = false
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -137,8 +150,27 @@ CBPeripheralDelegate{
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         print(sender.currentTitle!)
+        switch sender.currentTitle! {
+        case "15":
+            print("15")
+//            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let list = storyboard?.instantiateViewController(withIdentifier: "devicelist")
+            navigationController?.pushViewController(list!, animated: true)
+//            present(DeviceListViewController(), animated: true, completion: nil)
+            break
+        default:
+            print("default")
+        }
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showlist"{
+            print("show list")
+//            UIApplication.shared.statusBarStyle = .default
+//            self.navigationController?.isNavigationBarHidden = false
+        }
+    }
 
 }
 
