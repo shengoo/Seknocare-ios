@@ -20,20 +20,24 @@ CBPeripheralDelegate{
     var chara:CBCharacteristic!;
     var peri:CBPeripheral!;
 
+    @IBOutlet weak var bluetoothbtn: UIButton!
     
     override func viewDidLoad() {
+        print("viewDidLoad")
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         manager = CBCentralManager(delegate: self, queue: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         print("viewWillAppear")
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         print("viewWillDisappear")
         UIApplication.shared.statusBarStyle = .default
         self.navigationController?.isNavigationBarHidden = false
@@ -155,8 +159,13 @@ CBPeripheralDelegate{
             print("15")
 //            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let list = storyboard?.instantiateViewController(withIdentifier: "devicelist")
-            navigationController?.pushViewController(list!, animated: true)
-//            present(DeviceListViewController(), animated: true, completion: nil)
+            list?.modalPresentationStyle = .popover
+            list?.popoverPresentationController?.sourceView = bluetoothbtn
+            list?.popoverPresentationController?.sourceRect = bluetoothbtn.bounds
+//            list?.popoverPresentationController?.arrowDirection = .any
+//            navigationController?.pushViewController(list!, animated: true)
+        
+            present(list!, animated: true, completion: nil)
             break
         default:
             print("default")
@@ -167,8 +176,9 @@ CBPeripheralDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showlist"{
             print("show list")
-//            UIApplication.shared.statusBarStyle = .default
-//            self.navigationController?.isNavigationBarHidden = false
+            
+            UIApplication.shared.statusBarStyle = .default
+            self.navigationController?.isNavigationBarHidden = false
         }
     }
 

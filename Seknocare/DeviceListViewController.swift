@@ -10,9 +10,14 @@ import UIKit
 import Foundation
 
 class DeviceListViewController: ViewController {
+    
+    
+    @IBOutlet weak var loading: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
-//        UIApplication.shared.statusBarStyle = .default
-//        self.navigationController?.isNavigationBarHidden = false
+        super.viewDidLoad()
         print("list")
+        loading.startAnimating()
+        
     }
 }
