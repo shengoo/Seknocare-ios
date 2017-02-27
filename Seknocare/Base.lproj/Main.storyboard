@@ -368,6 +368,7 @@
                     <navigationItem key="navigationItem" id="suW-az-S1k"/>
                     <connections>
                         <outlet property="bluetoothbtn" destination="6RR-DG-m5h" id="IWD-C3-sqh"/>
+                        <outlet property="label" destination="44o-4c-WPj" id="v67-UJ-lMt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

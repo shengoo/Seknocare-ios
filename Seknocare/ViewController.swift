@@ -16,19 +16,23 @@ CBPeripheralDelegate{
     var manager:CBCentralManager!
     var discoverPeripherals = [CBPeripheral]()
     
+    var content:ShowContent = ShowContent()
+    
+    var timer:Timer = Timer()
+    
     
     var chara:CBCharacteristic!;
     var peri:CBPeripheral!;
 
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var bluetoothbtn: UIButton!
     
     override func viewDidLoad() {
         print("viewDidLoad")
         super.viewDidLoad()
+        updateText()
         // Do any additional setup after loading the view, typically from a nib.
-        manager = CBCentralManager(delegate: self, queue: nil)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
@@ -155,32 +159,170 @@ CBPeripheralDelegate{
     @IBAction func buttonPressed(_ sender: UIButton) {
         print(sender.currentTitle!)
         switch sender.currentTitle! {
+            
+        case "1":
+            sendMessage(0xC1)
+            setMode("PRESS")
+            break
+        case "2":
+            sendMessage(0xA8)
+            setMode("NIP")
+            break
+        case "3":
+            sendMessage(0xA2)
+            setMode("PRICK")
+            break
+        case "4":
+            sendMessage(0xA7)
+            setMode("RAP")
+            
+            break
+        case "5":
+            sendMessage(0xA3)
+            setMode("STROKE")
+            
+            break
+        case "6":
+            sendMessage(0xA6)
+            setMode("FLUTTER")
+            
+            break
+        case "7":
+            sendMessage(0xA4)
+            setMode("SCRAPE")
+            
+            break
+        case "8":
+            sendMessage(0xA5)
+            setMode("PINCH")
+            
+            break
+        case "9":
+            sendMessage(0xC0)
+            setMode("AUTO")
+            
+            break
+            
+        case "11":
+            showSetTimeDialog()
+            break
+        case "12":
+            sendMessage(0xC0)
+            break
+        case "13":
+            sendMessage(0xC0)
+            break
+        case "14":
+            sendMessage(0xC0)
+            break
+            
         case "15":
             print("15")
 //            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let list = storyboard?.instantiateViewController(withIdentifier: "devicelist")
-            list?.modalPresentationStyle = .popover
-            list?.popoverPresentationController?.sourceView = bluetoothbtn
-            list?.popoverPresentationController?.sourceRect = bluetoothbtn.bounds
+//            let list = storyboard?.instantiateViewController(withIdentifier: "devicelist")
+//            list?.modalPresentationStyle = .popover
+//            list?.popoverPresentationController?.sourceView = bluetoothbtn
+//            list?.popoverPresentationController?.sourceRect = bluetoothbtn.bounds
 //            list?.popoverPresentationController?.arrowDirection = .any
 //            navigationController?.pushViewController(list!, animated: true)
         
-            present(list!, animated: true, completion: nil)
+//            present(list!, animated: true, completion: nil)
+            
+            restart()
             break
         default:
             print("default")
         }
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showlist"{
-            print("show list")
-            
-            UIApplication.shared.statusBarStyle = .default
-            self.navigationController?.isNavigationBarHidden = false
-        }
+    func showSetTimeDialog(){
+        let optionMenu = UIAlertController(title: nil, message: "Set Time", preferredStyle: .actionSheet)
+        
+        // 2
+        let mi10 = UIAlertAction(title: "10 minutes", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.setTime(10)
+        })
+        let mi20 = UIAlertAction(title: "20 minutes", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.setTime(20)
+        })
+        
+        let mi30 = UIAlertAction(title: "20 minutes", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.setTime(30)
+        })
+        
+        //
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("Cancelled")
+        })
+        
+        
+        // 4
+        optionMenu.addAction(mi10)
+        optionMenu.addAction(mi20)
+        optionMenu.addAction(mi30)
+        optionMenu.addAction(cancelAction)
+        
+        // 5
+        self.present(optionMenu, animated: true, completion: nil)
     }
+    
+    func setTime(_ minute:Int){
+        content.Minute = minute
+        content.Second = 0
+        updateText()
+    }
+    
+    func updateText() {
+        print(content.getContent())
+        label.text = content.getContent()
+    }
+    
+    func setMode(_ mode:String) {
+        content.Mode = mode
+        content.Strang = 0
+        stop()
+        setTime(10)
+    }
+    
+    func restart(){
+        
+        // stop and disconnect
+        manager.stopScan()
+        manager.cancelPeripheralConnection(peri)
+        
+        // start and discover
+        manager = CBCentralManager(delegate: self, queue: nil)
+    }
+    
+    func start(){
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.tick), userInfo: nil, repeats: true)
+    }
+    
+    func tick(){
+        print("tick")
+        timer.invalidate()
+    }
+
+    
+    func stop(){
+        sendMessage(0xB2);
+        timer.invalidate()
+    }
+    
+    func increaseIntensity(){
+        
+    }
+    
+    func decreaseIntensity(){
+        
+    }
+    
+    
+    
 
 }
 
