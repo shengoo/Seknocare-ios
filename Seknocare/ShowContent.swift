@@ -28,11 +28,29 @@ class ShowContent{
     
     
     func getContent() -> String {
-        return "Time:\(Time)  Mode:\(Mode)  Strenth:\(Strang)  Power:\(Power)  " + (BluetoothState ? "Connect" : "Disconnect")
+        if(BluetoothState){
+            return "Time:\(Time)  Mode:\(Mode)  Strenth:\(Strang)  Power:\(Power)  " + (BluetoothState ? "Connect" : "Disconnect")
+        }else{
+            
+            return "Disconnect"
+        }
     }
     
     func updateTime() {
         Time = "\(Minute):\(Second)"
+    }
+    
+    func minus(){
+        if(Second == 0){
+            if(Minute == 0){
+                return
+            }
+            Second = 59
+            Minute -= 1
+        }else{
+            Second -= 1
+        }
+        updateTime()
     }
 
     
