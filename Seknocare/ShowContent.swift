@@ -13,7 +13,7 @@ class ShowContent{
     var Mode:String = "Auto"
     var Power:Int = 0
     var Strang:Int = 0
-    var Time:String = "0:0"
+    var Time:String = "0:00"
     var Minute:Int = 0{
         didSet{
             updateTime()
@@ -37,7 +37,7 @@ class ShowContent{
     }
     
     func updateTime() {
-        Time = "\(Minute):\(Second)"
+        Time = "\(Minute):" + String(format: "%02d", Second)
     }
     
     func minus(){
