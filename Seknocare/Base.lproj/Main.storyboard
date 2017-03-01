@@ -376,10 +376,10 @@
             </objects>
             <point key="canvasLocation" x="115.94202898550725" y="120.65217391304348"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Device List View Controller-->
         <scene sceneID="WXg-6t-1sF">
             <objects>
-                <tableViewController id="FUk-mX-LSY" sceneMemberID="viewController">
+                <tableViewController id="FUk-mX-LSY" customClass="DeviceListViewController" customModule="Seknocare" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="RVE-4K-4nB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
