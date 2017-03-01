@@ -306,7 +306,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gJa-Pj-AFS"/>
-                                                    <segue destination="FUk-mX-LSY" kind="show" id="oAz-Do-1y7"/>
+                                                    <segue destination="FUk-mX-LSY" kind="show" identifier="showlist" id="oAz-Do-1y7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -384,14 +384,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Mf-lw-0gv">
+                            <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <segue destination="a8I-HW-P8s" kind="unwind" unwindAction="unwindToMainWithSegue:" id="2mN-Oo-Goe"/>
+                            </connections>
+                        </button>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dse-P0-0yB">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="oRg-bE-Bku" detailTextLabel="RLe-jJ-3a3" style="IBUITableViewCellStyleSubtitle" id="dse-P0-0yB">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dse-P0-0yB" id="vhZ-BB-npH">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oRg-bE-Bku">
+                                            <rect key="frame" x="15" y="5" width="33.333333333333336" height="20.333333333333332"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RLe-jJ-3a3">
+                                            <rect key="frame" x="15" y="25.333333333333332" width="32.666666666666664" height="14.333333333333334"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="a8I-HW-P8s" kind="unwind" unwindAction="unwindToMainWithSegue:" id="q89-fY-FOZ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -399,10 +426,15 @@
                             <outlet property="delegate" destination="FUk-mX-LSY" id="RpQ-oC-RI8"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="8zp-dt-EfS"/>
+                    <connections>
+                        <segue destination="a8I-HW-P8s" kind="unwind" identifier="backToMain" unwindAction="unwindToMainWithSegue:" id="3Nh-QL-6C9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WpO-bU-fkN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="a8I-HW-P8s" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="777" y="122"/>
+            <point key="canvasLocation" x="954" y="121"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g2R-8p-q75">

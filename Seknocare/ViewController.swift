@@ -386,6 +386,12 @@ CBPeripheralDelegate{
         updateText()
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if(segue.identifier == "showlist"){
+//            (segue.destination as! DeviceListViewController).root = self
+//        }
+//    }
+    
 
 }
 
