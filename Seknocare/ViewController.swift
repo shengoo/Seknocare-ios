@@ -60,7 +60,7 @@ CBPeripheralDelegate{
     
     // bluetooth status
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == CBManagerState.poweredOn {
+        if central.state == .poweredOn {
             print("Bluetooth open.")
             central.scanForPeripherals(withServices: nil, options: nil)
             
@@ -227,7 +227,7 @@ CBPeripheralDelegate{
             decreaseIntensity()
             break
         case "15":
-            restart()
+//            restart()
             break
         default:
             print("default")
