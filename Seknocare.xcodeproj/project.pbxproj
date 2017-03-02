@@ -15,8 +15,8 @@
 		04B3F0871E163DAE00BE0A12 /* SeknocareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F0861E163DAE00BE0A12 /* SeknocareTests.swift */; };
 		04B3F0921E163DAE00BE0A12 /* SeknocareUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3F0911E163DAE00BE0A12 /* SeknocareUITests.swift */; };
 		04FCD98E1E6480240060F0CC /* ShowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD98D1E6480240060F0CC /* ShowContent.swift */; };
-		04FCD9901E65C0A80060F0CC /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD98F1E65C0A80060F0CC /* Toast.swift */; };
 		04FCD9941E671D110060F0CC /* DeviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD9931E671D110060F0CC /* DeviceListViewController.swift */; };
+		04FCD9961E686C720060F0CC /* HRToast+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FCD9951E686C720060F0CC /* HRToast+UIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +51,8 @@
 		04B3F0911E163DAE00BE0A12 /* SeknocareUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeknocareUITests.swift; sourceTree = "<group>"; };
 		04B3F0931E163DAE00BE0A12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04FCD98D1E6480240060F0CC /* ShowContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowContent.swift; sourceTree = "<group>"; };
-		04FCD98F1E65C0A80060F0CC /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		04FCD9931E671D110060F0CC /* DeviceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceListViewController.swift; sourceTree = "<group>"; };
+		04FCD9951E686C720060F0CC /* HRToast+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HRToast+UIView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +110,8 @@
 				04B3F07A1E163DAE00BE0A12 /* LaunchScreen.storyboard */,
 				04B3F07D1E163DAE00BE0A12 /* Info.plist */,
 				04FCD98D1E6480240060F0CC /* ShowContent.swift */,
-				04FCD98F1E65C0A80060F0CC /* Toast.swift */,
 				04FCD9931E671D110060F0CC /* DeviceListViewController.swift */,
+				04FCD9951E686C720060F0CC /* HRToast+UIView.swift */,
 			);
 			path = Seknocare;
 			sourceTree = "<group>";
@@ -273,8 +273,8 @@
 			files = (
 				04FCD98E1E6480240060F0CC /* ShowContent.swift in Sources */,
 				04FCD9941E671D110060F0CC /* DeviceListViewController.swift in Sources */,
+				04FCD9961E686C720060F0CC /* HRToast+UIView.swift in Sources */,
 				04B3F0741E163DAE00BE0A12 /* ViewController.swift in Sources */,
-				04FCD9901E65C0A80060F0CC /* Toast.swift in Sources */,
 				04B3F0721E163DAE00BE0A12 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

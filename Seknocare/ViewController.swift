@@ -23,8 +23,9 @@ CBPeripheralDelegate{
     var timer:Timer = Timer()
     
     
-    var chara:CBCharacteristic!;
-    var peri:CBPeripheral!;
+    var chara:CBCharacteristic!
+    var peri:CBPeripheral!
+    var selectedUUID:UUID!
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var bluetoothbtn: UIButton!
@@ -32,7 +33,6 @@ CBPeripheralDelegate{
     override func viewDidLoad() {
         print("viewDidLoad")
         super.viewDidLoad()
-        manager = CBCentralManager(delegate: self, queue: nil)
 
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -63,9 +63,9 @@ CBPeripheralDelegate{
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn {
             print("Bluetooth open.")
-//            central.scanForPeripherals(withServices: nil, options: nil)
-            
-//            self.view.makeToast("Scaning...", duration: 1.0, position: .center)
+            central.scanForPeripherals(withServices: nil, options: nil)
+            view.makeToastActivity(message: "Connecting...")
+//            self.view.makeToast("Connecting...", duration: 1.0, position: .center)
             
         } else {
             print("Bluetooth not available.")
@@ -83,9 +83,12 @@ CBPeripheralDelegate{
     // discover
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if(peripheral.name == "BCM99"){
-            discoverPeripherals.append(peripheral)
-            print(peripheral)
-            central.connect(peripheral, options: nil)
+            print("is:\(peripheral.identifier == selectedUUID)")
+            if(peripheral.identifier == selectedUUID){
+                peri = peripheral
+                central.connect(peripheral, options: nil)
+            }
+//            central.connect(peripheral, options: nil)
         }
     }
     
@@ -100,9 +103,10 @@ CBPeripheralDelegate{
     // connected
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("didConnect")
+        view.hideToastActivity()
         peripheral.delegate = self
         peripheral.discoverServices(nil)
-        self.view.makeToast("Connected to device.", duration: 2.0, position: .center)
+        self.view.makeToast(message: "Connected to device.", duration: 1, position: "center" as AnyObject)
     }
     
     // discover services
@@ -169,7 +173,7 @@ CBPeripheralDelegate{
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         if(!connected && sender.currentTitle != "15"){
-            view.makeToast("Please connect to device.", duration: 2.0, position: .center)
+            view.makeToast(message: "Please connect to device.", duration: 1, position: "center" as AnyObject)
             return
         }
         switch sender.currentTitle! {
@@ -397,10 +401,9 @@ CBPeripheralDelegate{
     
     
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
-        print(peri)
-        if(peri != nil){
+        if(selectedUUID != nil){
             print("try connect")
-            manager.connect(peri, options: nil)
+            manager = CBCentralManager(delegate: self, queue: nil)
         }
     }
     

@@ -30,8 +30,8 @@ class DeviceListViewController: UITableViewController,CBCentralManagerDelegate,C
             print("Bluetooth open.")
             loading.startAnimating()
             central.scanForPeripherals(withServices: nil, options: nil)
-            
-            self.view.makeToast("Scaning...", duration: 1.0, position: .center)
+            view.makeToast(message: "Scaning...", duration: 1, position: "center" as AnyObject)
+//            self.view.makeToast(message: "Scaning...")
             
         } else {
             loading.stopAnimating()
@@ -54,7 +54,6 @@ class DeviceListViewController: UITableViewController,CBCentralManagerDelegate,C
             if(!peripherals.contains(peripheral)){
                 peripherals.append(peripheral)
                 tableView.reloadData()
-                print(peripheral)
             }
 //            central.connect(peripheral, options: nil)
         }
@@ -80,7 +79,7 @@ class DeviceListViewController: UITableViewController,CBCentralManagerDelegate,C
 
         cell.textLabel?.text = peripherals[indexPath.row].name
         cell.detailTextLabel?.text = peripherals[indexPath.row].description
-        print(peripherals[indexPath.row])
+//        print(peripherals[indexPath.row])
         // Configure the cell...
 
         return cell
@@ -92,11 +91,11 @@ class DeviceListViewController: UITableViewController,CBCentralManagerDelegate,C
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare for \(segue.identifier)")
+//        print("prepare for \(segue.identifier)")
         if(segue.identifier == "unwind"){
             if let indexPath = tableView.indexPathForSelectedRow {
                 let selectedPeri = peripherals[indexPath.row]
-                (segue.destination as! ViewController).peri = selectedPeri
+                (segue.destination as! ViewController).selectedUUID = selectedPeri.identifier
             }
         }
     }
