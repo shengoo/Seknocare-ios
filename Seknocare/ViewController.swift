@@ -32,6 +32,7 @@ CBPeripheralDelegate{
     override func viewDidLoad() {
         print("viewDidLoad")
         super.viewDidLoad()
+        manager = CBCentralManager(delegate: self, queue: nil)
 
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -62,9 +63,9 @@ CBPeripheralDelegate{
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn {
             print("Bluetooth open.")
-            central.scanForPeripherals(withServices: nil, options: nil)
+//            central.scanForPeripherals(withServices: nil, options: nil)
             
-            self.view.makeToast("Scaning...", duration: 1.0, position: .center)
+//            self.view.makeToast("Scaning...", duration: 1.0, position: .center)
             
         } else {
             print("Bluetooth not available.")
@@ -90,6 +91,7 @@ CBPeripheralDelegate{
     
     // fail to connect
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("didFailToConnect")
         let alert = UIAlertController(title: "Connect failed.", message: "Connect failed.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -97,6 +99,7 @@ CBPeripheralDelegate{
     
     // connected
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("didConnect")
         peripheral.delegate = self
         peripheral.discoverServices(nil)
         self.view.makeToast("Connected to device.", duration: 2.0, position: .center)
@@ -391,6 +394,15 @@ CBPeripheralDelegate{
 //            (segue.destination as! DeviceListViewController).root = self
 //        }
 //    }
+    
+    
+    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        print(peri)
+        if(peri != nil){
+            print("try connect")
+            manager.connect(peri, options: nil)
+        }
+    }
     
 
 }

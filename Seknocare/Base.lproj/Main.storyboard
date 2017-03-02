@@ -384,17 +384,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Mf-lw-0gv">
-                            <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                        <activityIndicatorView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="shQ-yQ-5Ze">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button"/>
-                            <connections>
-                                <segue destination="a8I-HW-P8s" kind="unwind" unwindAction="unwindToMainWithSegue:" id="2mN-Oo-Goe"/>
-                            </connections>
-                        </button>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="oRg-bE-Bku" detailTextLabel="RLe-jJ-3a3" style="IBUITableViewCellStyleSubtitle" id="dse-P0-0yB">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dse-P0-0yB" id="vhZ-BB-npH">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
@@ -416,9 +412,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="a8I-HW-P8s" kind="unwind" unwindAction="unwindToMainWithSegue:" id="q89-fY-FOZ"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -428,7 +421,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="8zp-dt-EfS"/>
                     <connections>
-                        <segue destination="a8I-HW-P8s" kind="unwind" identifier="backToMain" unwindAction="unwindToMainWithSegue:" id="3Nh-QL-6C9"/>
+                        <outlet property="loading" destination="shQ-yQ-5Ze" id="15U-ez-6gN"/>
+                        <segue destination="a8I-HW-P8s" kind="unwind" identifier="unwind" unwindAction="unwindToMainWithSegue:" id="dHz-nz-odD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WpO-bU-fkN" userLabel="First Responder" sceneMemberID="firstResponder"/>

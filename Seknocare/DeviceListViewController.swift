@@ -7,25 +7,59 @@
 //
 
 import UIKit
+import CoreBluetooth
 
-class DeviceListViewController: UITableViewController {
+class DeviceListViewController: UITableViewController,CBCentralManagerDelegate,CBPeripheralDelegate {
     
-//    var root:UIViewController?
+    @IBOutlet weak var loading: UIActivityIndicatorView!
+
+    
+    
+    var peripherals = [CBPeripheral]()
+    var manager:CBCentralManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        manager = CBCentralManager(delegate: self, queue: nil)
+    }
+    
+    // bluetooth status
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == .poweredOn {
+            print("Bluetooth open.")
+            loading.startAnimating()
+            central.scanForPeripherals(withServices: nil, options: nil)
+            
+            self.view.makeToast("Scaning...", duration: 1.0, position: .center)
+            
+        } else {
+            loading.stopAnimating()
+            print("Bluetooth not available.")
+            
+            // create the alert
+            let alert = UIAlertController(title: "Bluetooth", message: "Please turn on bluetooth.", preferredStyle: UIAlertControllerStyle.alert)
+            // add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    
+    // discover
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if(peripheral.name == "BCM99"){
+            if(!peripherals.contains(peripheral)){
+                peripherals.append(peripheral)
+                tableView.reloadData()
+                print(peripheral)
+            }
+//            central.connect(peripheral, options: nil)
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
@@ -36,7 +70,7 @@ class DeviceListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return peripherals.count
     }
 
     
@@ -44,31 +78,32 @@ class DeviceListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 //        let cell = UITableViewCell()
 
-        cell.textLabel?.text = "hello"
-        cell.detailTextLabel?.text = "world"
+        cell.textLabel?.text = peripherals[indexPath.row].name
+        cell.detailTextLabel?.text = peripherals[indexPath.row].description
+        print(peripherals[indexPath.row])
         // Configure the cell...
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(root)
         
-        self.performSegue(withIdentifier: "backToMain", sender: "hello")
-//        root?.dismiss(animated: true, completion: nil)
-//        unwind(for: <#T##UIStoryboardSegue#>, towardsViewController: <#T##UIViewController#>)
+        self.performSegue(withIdentifier: "unwind", sender: "hello")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "backToMain"){
-//            segue.destination
-            print("backToMain")
+        print("prepare for \(segue.identifier)")
+        if(segue.identifier == "unwind"){
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let selectedPeri = peripherals[indexPath.row]
+                (segue.destination as! ViewController).peri = selectedPeri
+            }
         }
     }
     
-    @IBAction func unwindToMain(segue: UIStoryboardSegue) {
-        print("unwindToMain")
-    }
+    
+    
+    
     
 
     /*
