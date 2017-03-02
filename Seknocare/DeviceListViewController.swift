@@ -78,7 +78,7 @@ class DeviceListViewController: UITableViewController,CBCentralManagerDelegate,C
 //        let cell = UITableViewCell()
 
         cell.textLabel?.text = peripherals[indexPath.row].name
-        cell.detailTextLabel?.text = peripherals[indexPath.row].description
+        cell.detailTextLabel?.text = "\(peripherals[indexPath.row].identifier)"
 //        print(peripherals[indexPath.row])
         // Configure the cell...
 

@@ -376,7 +376,7 @@
             </objects>
             <point key="canvasLocation" x="115.94202898550725" y="120.65217391304348"/>
         </scene>
-        <!--Device List View Controller-->
+        <!--Select device-->
         <scene sceneID="WXg-6t-1sF">
             <objects>
                 <tableViewController id="FUk-mX-LSY" customClass="DeviceListViewController" customModule="Seknocare" customModuleProvider="target" sceneMemberID="viewController">
@@ -419,7 +419,7 @@
                             <outlet property="delegate" destination="FUk-mX-LSY" id="RpQ-oC-RI8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="8zp-dt-EfS"/>
+                    <navigationItem key="navigationItem" title="Select device" id="8zp-dt-EfS"/>
                     <connections>
                         <outlet property="loading" destination="shQ-yQ-5Ze" id="15U-ez-6gN"/>
                         <segue destination="a8I-HW-P8s" kind="unwind" identifier="unwind" unwindAction="unwindToMainWithSegue:" id="dHz-nz-odD"/>
