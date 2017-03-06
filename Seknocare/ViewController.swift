@@ -386,11 +386,14 @@ CBPeripheralDelegate{
     }
     
     func initDeviceState(){
+        if(timer.isValid){
+            timer.invalidate()
+        }
         
         content.BluetoothState = true
         sendMessage(0xE0); // show bluetooth light on device
         sendMessage(0xC0); // set mode to auto
-//        sendMessage(0xF2 + 1); // set strang 1
+        sendMessage(0xF2 + 1); // set strang 1
         setTime(10)
         updateText()
     }
