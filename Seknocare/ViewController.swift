@@ -147,7 +147,9 @@ CBPeripheralDelegate{
             var out: UInt8 = 0
             characteristic.value?.copyBytes(to: &out, count: MemoryLayout<Int>.size)
             print("battery level:\(out)")
-            content.Power = Int(out)
+            //todo:read real power
+//            content.Power = Int(out)
+            content.Power = 80
             connected = true
             initDeviceState()
         }
