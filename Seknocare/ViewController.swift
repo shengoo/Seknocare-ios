@@ -11,7 +11,8 @@ import CoreBluetooth
 
 class ViewController: UIViewController,
     CBCentralManagerDelegate,
-CBPeripheralDelegate{
+    CBPeripheralManagerDelegate,
+    CBPeripheralDelegate{
     
     var connected:Bool = false
     
@@ -31,26 +32,26 @@ CBPeripheralDelegate{
     @IBOutlet weak var bluetoothbtn: UIButton!
     
     override func viewDidLoad() {
-        print("viewDidLoad")
         super.viewDidLoad()
 
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         UIApplication.shared.statusBarStyle = .lightContent
         self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
         UIApplication.shared.statusBarStyle = .default
         self.navigationController?.isNavigationBarHidden = false
         
     }
     
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        print(peripheral)
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -102,7 +103,6 @@ CBPeripheralDelegate{
     
     // connected
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("didConnect")
         view.hideToastActivity()
         peripheral.delegate = self
         peripheral.discoverServices(nil)
@@ -295,6 +295,7 @@ CBPeripheralDelegate{
         pause()
         setTime(10)
         updateText()
+        sendMessage(0xE0);
     }
     
     func restart(){
@@ -327,7 +328,7 @@ CBPeripheralDelegate{
 
     
     func pause(){
-        sendMessage(0xB2);
+        sendMessage(0xB2);// stop
         timer.invalidate()
     }
     
@@ -337,9 +338,10 @@ CBPeripheralDelegate{
         content.Strang = 0
         content.BluetoothState = false
         connected = false
-        sendMessage(0xB2);
+        sendMessage(0xB2);// stop
         updateText();
-        
+        manager.cancelPeripheralConnection(peri)
+        peri = nil
     }
     
     func increaseIntensity(){
@@ -349,7 +351,7 @@ CBPeripheralDelegate{
         if(content.Strang == 10){
             return
         }
-        if(content.Strang > 5){
+        if(content.Strang > 4){
             let alert = UIAlertController(title: "Error", message: "Intensity has been greater than 5, are you continue?", preferredStyle: UIAlertControllerStyle.alert)
             // add an action (button)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -393,7 +395,7 @@ CBPeripheralDelegate{
         content.BluetoothState = true
         sendMessage(0xE0); // show bluetooth light on device
         sendMessage(0xC0); // set mode to auto
-        sendMessage(0xF2 + 1); // set strang 1
+        sendMessage(0xF1); // set strang 0
         setTime(10)
         updateText()
     }
@@ -406,8 +408,13 @@ CBPeripheralDelegate{
     
     
     @IBAction func unwindToMain(segue: UIStoryboardSegue) {
+        if(peri != nil){
+            if(peri.state == CBPeripheralState.connected){
+                manager.cancelPeripheralConnection(peri)
+                peri = nil
+            }
+        }
         if(selectedUUID != nil){
-            print("try connect")
             manager = CBCentralManager(delegate: self, queue: nil)
         }
     }
