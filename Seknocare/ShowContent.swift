@@ -29,7 +29,7 @@ class ShowContent{
     
     func getContent() -> String {
         if(BluetoothState){
-            return "Time:\(Time)  Mode:\(Mode)  Strenth:\(Strang)  Power:\(Power)  " + (BluetoothState ? "Connect" : "Disconnect")
+            return "Time:\(Time)  Mode:\(Mode)  Strenth:\(Strang)  " + (BluetoothState ? "Connect" : "Disconnect")
         }else{
             
             return "Disconnect"
